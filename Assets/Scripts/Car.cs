@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class Car : MonoBehaviour
@@ -36,5 +38,15 @@ public class Car : MonoBehaviour
     public void Steer(int direction)
     {
         steer = turnSpeed * (float) direction;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collision detected with:" + other.tag);
+
+        if (other.tag == "Obstacle")
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }
