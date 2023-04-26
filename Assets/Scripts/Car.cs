@@ -42,7 +42,7 @@ public class Car : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision detected with:" + other.tag);
+        Debug.Log($"Collision detected with: {other.tag}");
 
         if (other.tag == "Obstacle")
         {

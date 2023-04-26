@@ -21,6 +21,16 @@ public class ScoreController : MonoBehaviour
     {
         score += scoreIncrement * Time.deltaTime;
 
-        textScore.text = "" + Mathf.FloorToInt(score);
+        textScore.text = $"{Mathf.FloorToInt(score)}";
+    }
+
+    private void OnDestroy()
+    {
+        int savedHighScore = PlayerPrefs.GetInt(MenuController.HIGH_SCORE, 0);
+
+        if (score > savedHighScore)
+        {
+            PlayerPrefs.SetInt(MenuController.HIGH_SCORE, Mathf.FloorToInt(score));
+        }
     }
 }
