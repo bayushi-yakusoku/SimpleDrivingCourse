@@ -16,10 +16,13 @@ public class MenuController : MonoBehaviour
 
     private int nbCharges;
     private DateTime rechargeTime;
+    //private AndroidNotificationHandler notificationHandler;
 
     // Start is called before the first frame update
     void Start()
     {
+        //notificationHandler = new AndroidNotificationHandler();
+
         int savedHighScore      = PlayerPrefs.GetInt(HIGH_SCORE, 0);
         nbCharges               = PlayerPrefs.GetInt(NB_CHARGES, maxNbCharges);
         string rechargeTimeText = PlayerPrefs.GetString(RECHARGE_TIME, DateTime.Now.ToString());
@@ -45,7 +48,12 @@ public class MenuController : MonoBehaviour
 
         if (rechargeTime < DateTime.Now)
         {
-            PlayerPrefs.SetString(RECHARGE_TIME, DateTime.Now.AddMinutes(timeToFillCharges).ToString());
+            DateTime rechargeTime = DateTime.Now.AddMinutes(timeToFillCharges);
+
+            PlayerPrefs.SetString(RECHARGE_TIME, rechargeTime.ToString());
+#if UNITY_ANDROID
+            AndroidNotificationHandler.ScheduleNotification(rechargeTime);
+#endif
         }
 
         nbCharges--;
