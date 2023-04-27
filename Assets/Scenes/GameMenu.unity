@@ -577,6 +577,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highScoretext: {fileID: 652684647}
+  playButtonText: {fileID: 2003480004}
+  maxNbCharges: 9
+  timeToFillCharges: 10
 --- !u!4 &1631466400
 Transform:
   m_ObjectHideFlags: 0
